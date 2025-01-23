@@ -1,0 +1,49 @@
+# i have 2 files 01_dataprep.py and 02_datapreproces.py
+name: HGV Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions: write-all
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: iterative/setup-cml@V3
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: |
+        pytest tests/
+    
+    - name: data prep
+      run: |
+        python 01_dataprep.py
+    - name: data preprocess
+      run: |
+        python 02_datapreproces.py
+      env :
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # echo "## Model Metrics" >> report.md
+        # cat metrics.txt >> report.md
+
+        # echo "## confusoion matrix" >> report.md
+        # echo "![confusion matrix](result.png)" >> report.md
+
+        # cal comment create report.md
+
+
+
