@@ -30,7 +30,8 @@ class preprocess():
         # create a dataframe with column names and their data types
         self.data = pd.DataFrame(columns=['date', 'origin_city', 'destination_city', 'flight_duration_secs', '#_of_passengers_on_board'], dtype='object')
         # read all the files in the directory and store in a dataframe
-        # log start time 
+        # log start time
+        logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
         
     def data_preprocess(self):
         logging.info('**Data Preprocessing Initated**')
@@ -61,6 +62,7 @@ class preprocess():
 
         logging.info(f'AVG flight_duration_secs for the Top 25 destination cities by the total number of passengers arriving: {top_25_destinations}')
         logging.info('**Key Metrics Calculation Completed**')
+        return top_25_destinations
 
     def passenger_balance_analysis(self):
         logging.info('**Passenger Balance Analysis Initiated**')
@@ -81,6 +83,7 @@ class preprocess():
             with open('preprocess.log', 'r') as log:
                 f.write(log.read())
         logging.info('Report Updated')
+        
 
     def run(self):
         self.data_preprocess()
