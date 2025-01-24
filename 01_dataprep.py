@@ -3,32 +3,30 @@ import json
 import os
 import pandas as pd
 import numpy as np
+import argparse
 
 # %%
-'''Folder Structure: Files should be stored in a directory like /tmp/flights/%MM-YY%-%origin_city%-flights.json, where:
-%MM-YY% corresponds to the current month and year.
-%origin_city% is the name of the origin city.
-File Contents:
-Each file should be a JSON array of flight records.
-Randomly generate the number of records per file, M, within the range [50 – 100].
-Flight Data Fields: Each flight record should contain the following:
-date: The date of the flight in ISO format (YYYY-MM-DD).
-origin_city: The name of the city where the flight originated.
-destination_city: The name of the city where the flight arrived.
-flight_duration_secs: Total duration of the flight in seconds.
-#_of_passengers_on_board: Number of passengers onboard.
-Cities Pool: Randomly select cities from a set of K = [100-200] city names.
-Dirty Records: With a probability L = [0.5% - 1%], some flight records should have NULL values in one or more fields.'''
+'''This class is responsible for generating flight data in JSON format'''
 
 class DataPrep:
-    def __init__(self, cities_pool, dirty_records_prob):
-        self.cities_pool = cities_pool
-        self.dirty_records_prob = dirty_records_prob
+    def __init__(self):
+        parser = argparse.ArgumentParser(description='Generate flight data.')
+        parser.add_argument('--cities_pool', nargs='+', default=['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'], help='List of cities to use as the pool of origin and destination cities.')
+        parser.add_argument('--dirty_records_prob', type=float, default=0.01, help='Probability of generating dirty records with NULL values.')
+        parser.add_argument('--num_files', type=int, default=5, help='Number of files to generate.')
+        parser.add_argument('--num_records_range', nargs=2, type=int, default=[50, 100], help='Range of number of records per file.')
+
+        args = parser.parse_args()
+
+        self.cities_pool = args.cities_pool
+        self.dirty_records_prob = args.dirty_records_prob
+        self.num_files = args.num_files
+        self.num_records_range = args.num_records_range
         self.dir = './tmp/flights'
 
-    def generate_flight_data(self, num_files, num_records_range):
-        for i in range(num_files):
-            num_records = np.random.randint(num_records_range[0], num_records_range[1])
+    def generate_flight_data(self):
+        for i in range(self.num_files):
+            num_records = np.random.randint(self.num_records_range[0], self.num_records_range[1])
             flights = []
             for j in range(num_records):
                 flight = {}
@@ -48,21 +46,11 @@ class DataPrep:
                 os.makedirs(self.dir)
             file_name = os.path.join(self.dir, file_name)
 
-            
             with open(file_name, 'w') as f:
                 json.dump(flights, f)
             print(f'File {file_name} created with {num_records} records')
 
-
 # if main
-
-# %%
 if __name__=='__main__':
-    cities_pool = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose']
-    dirty_records_prob = 0.01
-    num_files = 5
-    dp = DataPrep(cities_pool, dirty_records_prob)
-    dp.generate_flight_data(num_files, [50, 100])
-
-
-# %%
+    dp = DataPrep()
+    dp.generate_flight_data()

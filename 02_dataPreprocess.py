@@ -5,23 +5,7 @@ import json
 import os
 import logging
 
-'''Objective: Process the generated JSON files and produce analytical results while handling data efficiently.
-Steps:
-Data Processing:
-Load all generated JSON files.
-Process each flight record while identifying and cleaning "dirty" records (i.e., records with NULLvalues).
-Result Output:
-Total count of records processed.
-Total count of "dirty" records.
-Total runtime of the analysis phase in milliseconds.
-Key Metrics:
-Calculate the AVG (average) and P95 (95th percentile) of flight_duration_secs for the Top 25 destination cities by the total number of passengers arriving.
-Passenger Balance Analysis:
-Assume all cities initially have 0 passengers.
-For each city, calculate the number of passengers remaining after accounting for departures and arrivals from all processed flight data.
-Identify:
-The city with the maximum remaining passengers.
-The city with the minimum remaining passengers.'''
+'''This class is responsible for preprocessing the flight data'''
 
 class preprocess():
     def __init__(self):
