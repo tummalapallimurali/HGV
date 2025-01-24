@@ -9,13 +9,10 @@ import logging
 
 class preprocess():
     def __init__(self):
-        # read all the files in the directory
-        self.dir = './tmp/flights'
-        # create a dataframe with column names and their data types
+        
+        self.dir = './tmp/flights'  
         self.data = pd.DataFrame(columns=['date', 'origin_city', 'destination_city', 'flight_duration_secs', '#_of_passengers_on_board'], dtype='object')
-        # read all the files in the directory and store in a dataframe
-        # log start time
-        logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+        #logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
         
     def data_preprocess(self):
         logging.info('**Data Preprocessing Initated**')
@@ -34,11 +31,9 @@ class preprocess():
     
     def key_metrics(self):
         logging.info('**Key Metrics Calculation Started**')
-        # logging.info(f'AVG flight_duration_secs for the Top 25 destination cities by the total number of passengers arriving: {self.data.groupby("destination_city")["flight_duration_secs"].mean().nlargest(25)}')
-        # logging.info(f'P95 flight_duration_secs for the Top 25 destination cities by the total number of passengers arriving: {self.data.groupby("destination_city")["flight_duration_secs"].apply(lambda x: np.percentile(x, 95)).nlargest(25)}')
         self.data['flight_duration_secs'] = pd.to_numeric(self.data['flight_duration_secs'], errors='coerce')
         
-        # Drop rows with NaN values in 'flight_duration_secs'
+        # Drop rows with NULL values in 'flight_duration_secs'
         self.data = self.data.dropna(subset=['flight_duration_secs'])
 
         # Group by 'destination_city' and calculate the mean of 'flight_duration_secs'
