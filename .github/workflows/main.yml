@@ -28,7 +28,7 @@ jobs:
         python 01_dataprep.py
     - name: data preprocess
       run: |
-        python 02_datapreproces.py
+        python 02_dataPreprocess.py
       env :
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #run: |
