@@ -11,7 +11,7 @@ import argparse
 class DataPrep:
     def __init__(self):
         parser = argparse.ArgumentParser(description='Generate flight data.')
-        parser.add_argument('--cities_pool', nargs='+', default=['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'], help='List of cities to use as the pool of origin and destination cities.')
+        parser.add_argument('--cities_pool', nargs='+', default=['NewYork', 'LosAngeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'SanAntonio', 'SanDiego', 'Dallas', 'SanJose'], help='List of cities to use as the pool of origin and destination cities.')
         parser.add_argument('--dirty_records_prob', type=float, default=0.01, help='Probability of generating dirty records with NULL values.')
         parser.add_argument('--num_files', type=int, default=5, help='Number of files to generate.')
         parser.add_argument('--num_records_range', nargs=2, type=int, default=[50, 100], help='Range of number of records per file.')

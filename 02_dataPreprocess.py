@@ -12,7 +12,7 @@ class preprocess():
         
         self.dir = './tmp/flights'  
         self.data = pd.DataFrame(columns=['date', 'origin_city', 'destination_city', 'flight_duration_secs', '#_of_passengers_on_board'], dtype='object')
-        #logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+        logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
         
     def data_preprocess(self):
         logging.info('**Data Preprocessing Initated**')
