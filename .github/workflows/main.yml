@@ -29,22 +29,14 @@ jobs:
     - name: data preprocess
       run: |
         python 02_dataPreprocess.py
-    - name: Upload Logs
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: dataprep-logs
-          path: dataprep.log
+    - name: Evaluate
       env :
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #run: |
-        # echo "## Model Metrics" >> report.md
-        # cat metrics.txt >> report.md
-
-        # echo "## confusoion matrix" >> report.md
-        # echo "![confusion matrix](result.png)" >> report.md
-
-        # cal comment create report.md
-
-
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+          echo "## Model Metrics" >> report.md
+          cat preprocess.log >> report.md
+  
+          # echo "## confusoion matrix" >> report.md
+          # echo "![confusion matrix](result.png)" >> report.md
+  
+          cml comment create report.md
