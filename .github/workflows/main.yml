@@ -29,6 +29,11 @@ jobs:
     - name: data preprocess
       run: |
         python 02_dataPreprocess.py
+    - name: Upload README.md
+      uses: actions/upload-artifact@v2
+      with:
+        name: README
+        path: README.md
       env :
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #run: |
