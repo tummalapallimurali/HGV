@@ -10,5 +10,6 @@
 
 # If you wish to modify any arguments: 
   - Go to: https://github.com/tummalapallimurali/HGV/blob/main/.github/workflows/main.yml
-  - Change line number 28 as per your requirement and sample input arguments looks like : python 01_dataprep.py --cities_pool NewYork LosAngeles Chicago Houston Phoenix Philadelphia SanAntonio --dirty_records_prob 0.5 --num_files 5000 --num_records_range 50 100
+  - Change line number 28 as per your requirement and sample input arguments looks like :
+  - python 01_dataprep.py --cities_pool NewYork LosAngeles Chicago Houston Phoenix Philadelphia SanAntonio --dirty_records_prob 0.5 --num_files 5000 --num_records_range 50 100
 
